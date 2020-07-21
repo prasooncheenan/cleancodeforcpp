@@ -1,32 +1,37 @@
 #include "paramchecker.h"
 
-bool isBPMOk(float bpm)
+#include <limits>
+#include <functional>
+
+
+std::pair<float,float> GetBPMLimits()
 {
-  if(bpm < 70 || bpm > 150) {
-    return false;
-  } else
-    return true;
+    return std::make_pair(70, 150);
 }
 
-bool isspo2Ok(float spo2)
+std::pair<float, float> GetSPOLimits()
 {
-  if(spo2 < 80) {
-    return false;
-  } else
-    return true;
+    return std::make_pair(80, std::numeric_limits<float>::max());
 }
 
-bool isrespRateOk(float respRate )
+std::pair<float, float> GetRespRateLimits()
 {
-  if(respRate < 30 || respRate > 60) {
-    return false;
-  } else
-  return true;
+    return std::make_pair(30, 60);
 }
-  
+
+
+bool isWithinLimits(float input, std::pair<float, float> limits)
+{
+    if (input < limits.first || input > limits.second)
+        return false;
+    return true;
+}
 bool vitalsAreOk(float bpm, float spo2, float respRate) {
-  //int i;
-    auto returnVal = isBPMOk(bpm) && isspo2Ok(spo2) && isrespRateOk(respRate);
-      return returnVal;
-   
+    int check = isWithinLimits(bpm, GetBPMLimits());
+    check += isWithinLimits(spo2, GetSPOLimits());
+    check += isWithinLimits(respRate, GetRespRateLimits());
+
+    if (check < 3) return false;
+
+    return true;
 }
