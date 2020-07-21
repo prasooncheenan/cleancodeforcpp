@@ -1,0 +1,66 @@
+
+
+
+interface FileReader
+{
+   FileReader(--filename)
+
+ RecordData GetRecordData()
+ 
+}
+
+interface FileWriter
+{
+  FileWriter(--ou)tputFileName or  -- logFileName)
+  
+  WriteRecord(Record)
+}
+
+interface RecordData
+{
+  //type recordList; impl
+   
+   AddRecordData( Record)
+   Record GetNextRecord()
+   int GetDataCount()
+  }
+  
+class Record
+{
+  type deviceID{ Get;Set}
+  type deviceName { Get;Set}
+  type location { Get;Set}
+  type status { Get;Set}
+}  
+
+
+class RecordProcessor
+{
+   RecordProcessor( Config)
+   boolean IsRecordValid( Record)
+}
+
+main()// commandline --filename --outputFileName --logFileName
+{
+    fileReader = GetFileReader( --filename);
+	fileOutputWriter = GetFileWriter(--outputFileName);
+	fileLogWriter = GetFileWriter(--logFileName);
+	
+	recordProcessor = RecordProcessor( Config);
+	
+	recordData = fileReader->GetRecordData();
+	
+	recordCount  = recordData->GetDataCount();
+	for (each record in recordData)
+	{
+	   if(recordProcessor->IsRecordValid( record))
+	    fileOutputWriter->WriteRecord(record)
+	   else
+         fileLogWriter->WriteRecord(record)	   
+	}
+	
+}	
+
+   
+   
+								  
