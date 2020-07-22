@@ -1,6 +1,7 @@
 #include  <vector>
 #include <map>
 #include <string>
+#include <limits>
 
 const std::string BPM = "bpm";
 const std::string SPO = "spo2";
@@ -45,9 +46,10 @@ public:
 		return _limitMap[key];
 	}
 
-	bool SetLimits(std::string key, std::pair<float, float> limits)
+	void SetLimits(std::string key, std::pair<float, float> limits)
 	{
 		_limitMap[key] = limits;
+		
 	}
 };
 bool vitalsAreOk(float bpm, float spo2, float respRate);
