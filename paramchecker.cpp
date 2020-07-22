@@ -1,8 +1,7 @@
 #include "paramchecker.h"
 
 #include <iostream>
-#include <limits>
-#include <functional>
+
 
 
 
