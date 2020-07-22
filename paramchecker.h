@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <limits>
+#include <functional>
 
 const std::string BPM = "bpm";
 const std::string SPO = "spo2";
